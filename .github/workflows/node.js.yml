@@ -12,6 +12,9 @@ concurrency:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        task: [lint, build, test]
     runs-on: ubuntu-latest
     timeout-minutes: 3
 
@@ -30,7 +33,6 @@ jobs:
       - name: Install npm dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci --prefer-offline --no-audit --ignore-scripts
-      - run: npm run lint
-      - run: npm test
-      - run: npm run build
+      - name: Run ${{ matrix.task }}
+        run: npm run ${{ matrix.task }}
       - run: docker build . -t greenict/demo-api
