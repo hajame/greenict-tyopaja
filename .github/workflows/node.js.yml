@@ -31,4 +31,10 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm test
+  generate-image:
+    name: Build the production docker image
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
       - run: docker build . -t greenict/demo-api

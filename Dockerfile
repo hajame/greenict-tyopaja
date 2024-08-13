@@ -1,14 +1,18 @@
-FROM node:18
+FROM node:18.20.4-alpine3.20 AS builder
 
-WORKDIR /usr/src/app
-ENV NODE_ENV=production
-
-COPY src .
+WORKDIR /deps
 COPY package.json .
 COPY package-lock.json .
-COPY database.sqlite .
 
-RUN npm install
+RUN npm install --omit=dev
 
+FROM node:18.20.4-alpine3.20
+WORKDIR /usr/src/app
+ENV NODE_ENV=production
 EXPOSE 8080
+
+COPY database.sqlite .
+COPY --from=builder /deps/node_modules node_modules
+COPY src .
+
 CMD ["node", "index.js"]
