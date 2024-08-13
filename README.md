@@ -1,6 +1,7 @@
-# Green ICT-työpaja
+# Fork: Green ICT-työpaja
 
-Green ICT -ekosysteemi 30.11 kestävän koodauksen työpaja #2
+- https://www.youtube.com/watch?v=fpWtVumCP80
+- https://github.com/Koura/greenict-tyopaja
 
 ## Sovelluksen ajaminen
 
